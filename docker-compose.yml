@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: hirebean-db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: hirebean_db
+      POSTGRES_USER: ${HIREBEAN_DB_USERNAME}
+      POSTGRES_PASSWORD: ${HIREBEAN_DB_PASS}
+    volumes:
+      - hirebean-db-data:/var/lib/postgresql/data
+
+volumes:
+    hirebean-db-data:
