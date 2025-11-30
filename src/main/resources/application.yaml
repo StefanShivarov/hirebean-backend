@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: hirebean
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/hirebean_db
+    username: ${HIREBEAN_DB_USERNAME}
+    password: ${HIREBEAN_DB_PASS}
