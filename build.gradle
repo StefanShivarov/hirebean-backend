@@ -10,7 +10,8 @@ description = 'hirebean-backend'
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+//        serho change the version to 23
+        languageVersion = JavaLanguageVersion.of(23)
     }
 }
 
