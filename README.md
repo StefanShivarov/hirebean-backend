@@ -1,4 +1,4 @@
-# hirebean-backend
+# HireBean-Backend, Spring Backend & React & Typescript app + Devops
 
 ## Форматиране
 | Цел           | Команда                   |
