@@ -40,7 +40,7 @@ jobs:
               --from-literal=HIREBEAN_DB_USERNAME=${{ secrets.HIREBEAN_DB_USERNAME }} \
               --from-literal=HIREBEAN_DB_PASS=${{ secrets.HIREBEAN_DB_PASS }} 
           
-          # Apply from folders
+          # Apply databses and backend from folders
           kubectl apply -f k8s/apps/database/ -n hirebean
           kubectl apply -f k8s/apps/backend/ -n hirebean
 
