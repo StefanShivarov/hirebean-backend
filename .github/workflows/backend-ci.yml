@@ -88,9 +88,10 @@ jobs:
           echo "Services in hirebean namespace:"
           kubectl get svc -n hirebean
           echo "=== POD LOGS (if failed) ==="
-          kubectl logs -l app=hirebean-backend -n hirebean --tail=50 || true
-          #Port forward to access the backend service
-          kubectl port-forward svc/hirebean-backend-service 8080:80 -n hirebean &
+          kubectl logs -l app=hirebean-backend -n hirebean --tail=100
+          echo " --------- INTERNAL CONNECTION TEST ==="
+          kubectl run curl-test --image=curlimages/curl -n hirebean --restart=Never -- curl -v --fail http://hirebean-backend-service:80/api/companies || true
+         
           sleep 10
           #Check if the backend is responding
-          curl -f http://localhost:8080/actuator/health
+          kubectl logs curl-test -n hirebean
