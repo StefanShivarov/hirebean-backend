@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/jobs")
+@RequestMapping("/api/jobs")
 @RequiredArgsConstructor
 public class JobOfferController {
   private final JobOfferService jobOfferService;

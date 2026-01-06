@@ -25,16 +25,32 @@ public class S3Service {
   @Value("${cdn.url}")
   private String cdnUrl;
 
-  //  Upload files and returns its key:
-  //  Example: logos/uuid-filename.png
+  private static final long MAX_FILE_BYTES = 10L * 1024 * 1024; // 10 MB
+
+  // Upload a file and return its key.
+  // Example: logos/uuid-filename.png.
   public String uploadFile(MultipartFile file, String folder) {
+    if (file == null || file.isEmpty()) {
+      throw new IllegalArgumentException("File must not be null or empty.");
+    }
+
+    long size = file.getSize();
+    if (size <= 0 || size > MAX_FILE_BYTES) {
+      throw new IllegalArgumentException(
+          "File size is invalid or exceeds the maximum allowed size.");
+    }
+
+    if (folder == null || folder.isBlank()) {
+      throw new IllegalArgumentException("Invalid folder.");
+    }
+
     String originalFilename = file.getOriginalFilename();
     String extension =
         originalFilename != null && originalFilename.contains(".")
             ? originalFilename.substring(originalFilename.lastIndexOf('.'))
             : "";
 
-    // preventing collision genering unique name!!!
+    // preventing collision generating unique name!!!
     String key = folder + "/" + UUID.randomUUID() + extension;
     try {
       s3Template.upload(bucketName, key, file.getInputStream());
