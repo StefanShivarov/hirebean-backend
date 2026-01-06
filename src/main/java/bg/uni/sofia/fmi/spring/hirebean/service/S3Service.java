@@ -41,7 +41,11 @@ public class S3Service {
       return key;
 
     } catch (IOException e) {
-      throw new RuntimeException("Failed to upload file to S3", e);
+      throw new RuntimeException(
+          String.format(
+              "Failed to upload file to S3 (bucket=%s, key=%s, originalFilename=%s)",
+              bucketName, key, originalFilename),
+          e);
     }
   }
 
