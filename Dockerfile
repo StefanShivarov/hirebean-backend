@@ -1,13 +1,11 @@
-#Build app
-FROM gradle:8.12.0-jdk23 AS builder
+# Смени 23 на 21 тук
+FROM gradle:8.12.0-jdk21 AS builder
 WORKDIR /app
 COPY . .
-
-#Skip test
-
 RUN ./gradlew build -x test --no-daemon
 
-FROM eclipse-temurin:23-jre-alpine
+# И тук смени 23 на 21
+FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
 
