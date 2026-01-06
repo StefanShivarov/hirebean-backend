@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 RUN ./gradlew build -x test --no-daemon
 
-# И тук смени 23 на 21
+
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
